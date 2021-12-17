@@ -1,0 +1,26 @@
+{
+  "name": "star-wars-app",
+  "version": "1.0.0",
+  "description": "App de Star Wars. Muestra personajes, de que planeta son y en que películas salieron.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipebertocchi/star-wars-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felipebertocchi/star-wars-app/issues"
+  },
+  "homepage": "https://github.com/felipebertocchi/star-wars-app#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
