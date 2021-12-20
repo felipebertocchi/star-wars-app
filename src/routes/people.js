@@ -5,10 +5,23 @@ const router = express.Router();
 
 router.get('/character', (req, res) => {
     let id = req.query.id;
-    axios.get('https://www.swapi.tech/api/people/' + id)
-    .then(resp => {
-        res.send(resp.data)
-    });
-})
+    let name = req.query.name;
+    if (id !== undefined) {
+        axios.get('https://www.swapi.tech/api/people/' + id)
+        .then(resp => {
+            res.send(resp.data);
+        });
+    } else if (name !== undefined) {
+        axios.get('https://www.swapi.tech/api/people/?name=' + name)
+        .then(resp => {
+            res.send(resp.data);
+        });
+    } else {
+        axios.get('https://www.swapi.tech/api/people?page=1&limit=82')
+        .then(resp => {
+            res.send(resp.data.results);
+        });
+    }
+});
 
 module.exports = router;

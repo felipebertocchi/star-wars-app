@@ -20,7 +20,12 @@
   "homepage": "https://github.com/felipebertocchi/star-wars-app#readme",
   "dependencies": {
     "axios": "^0.24.0",
-    "express": "^4.17.2"
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
