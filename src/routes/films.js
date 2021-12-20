@@ -5,13 +5,19 @@ const router = express.Router();
 
 router.get('/film/:character', (req, res) => {
     let id = req.params.character;
-    axios.get('https://www.swapi.tech/api/people/' + id)
-    .then(resp => {
-        axios.get(resp.data.result.properties.films)
+    axios.get('https://www.swapi.tech/api/films')
         .then(resp => {
-            res.send(resp.data);
+            const PelisDondeAparece = [];
+            const listaPeliculas = (resp.data.result);
+            for (let i = 0; i < listaPeliculas.length; i++) {
+                let listaPersonajes = (listaPeliculas[i].properties.characters);
+                // console.log("Hola");
+                if (listaPersonajes.includes("https://www.swapi.tech/api/people/" + id)) {
+                    PelisDondeAparece.push(listaPeliculas[i])
+                }
+            }
+            res.send(PelisDondeAparece);
         });
-    });
 });
 
 module.exports = router;
