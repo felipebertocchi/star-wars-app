@@ -1,10 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
 const path = require('path'); 
 
 const app = express();
 
 // SETTINGS
 app.set('port', process.env.PORT || 8080);
+dotenv.config();
+mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB connected successfully"));
 
 // ROUTES
 const apiRoute = '/v1'
@@ -16,6 +21,8 @@ const login = require('./routes/login');
 const favorite = require('./routes/favorite');
 
 // MIDDLEWARE
+app.use(express.json());
+app.use(cors());
 app.use(apiRoute, people);
 app.use(apiRoute, planets);
 app.use(apiRoute, films);
