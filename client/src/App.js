@@ -10,6 +10,7 @@ import FilmPage from './pages/FilmPage';
 import NotFoundPage from './pages/NotFoundPage';
 // import Layout from '../components/layouts/Layout';
 import routes from './helpers/routes';
+import axios from 'axios';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -18,21 +19,24 @@ function App() {
 
   useEffect(() => {
     async function fetchPeople() {
-      let res = await fetch('https://www.swapi.tech/api/people')
-      let data = await res.json();
-      setPeople(data.results);
+      axios.get('http://localhost:8080/v1/character')
+        .then(resp => {
+          setPeople(resp.data.results);
+        });
     }
 
     async function fetchPlanets() {
-      let res = await fetch('https://www.swapi.tech/api/planets')
-      let data = await res.json();
-      setPlanets(data.results);
+      axios.get('http://localhost:8080/v1/planet')
+        .then(resp => {
+          setPlanets(resp.data.results);
+        });
     }
 
     async function fetchFilms() {
-      let res = await fetch('https://www.swapi.tech/api/films')
-      let data = await res.json();
-      setFilms(data.result);
+      axios.get('http://localhost:8080/v1/film')
+        .then(resp => {
+          setFilms(resp.data.result);
+        });
     }
 
     fetchPeople();
