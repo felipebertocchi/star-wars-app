@@ -17,9 +17,9 @@ router.get('/character', (req, res) => {
             res.send(resp.data);
         });
     } else {
-        axios.get('https://www.swapi.tech/api/people?page=1&limit=82')
+        axios.get('https://www.swapi.tech/api/people')
         .then(resp => {
-            res.send(resp.data.results);
+            res.send(resp.data);
         });
     }
 });

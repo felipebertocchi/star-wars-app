@@ -3,14 +3,11 @@ const axios = require('axios');
 
 const router = express.Router();
 
-router.get('/planet/:character', (req, res) => {
+router.get('/planet', (req, res) => {
     let id = req.params.character;
-    axios.get('https://www.swapi.tech/api/people/' + id)
+    axios.get('https://www.swapi.tech/api/planets/')
     .then(resp => {
-        axios.get(resp.data.result.properties.homeworld)
-        .then(resp => {
-            res.send(resp.data);
-        });
+        res.send(resp.data);
     });
 });
 

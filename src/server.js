@@ -13,7 +13,9 @@ mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB connect
 
 // ROUTES
 const apiRoute = '/v1'
-const people = require('./routes/people');
+const people = require('./routes/people'); // Lista de personajes
+const homeworld = require('./routes/homeworld'); // Planeta natal
+const appearsOn = require('./routes/appearsOn'); // Peliculas donde aparece
 const planets = require('./routes/planets');
 const films = require('./routes/films');
 const signup = require('./routes/signup');
@@ -24,6 +26,8 @@ const favorite = require('./routes/favorite');
 app.use(express.json());
 app.use(cors());
 app.use(apiRoute, people);
+app.use(apiRoute, homeworld);
+app.use(apiRoute, appearsOn);
 app.use(apiRoute, planets);
 app.use(apiRoute, films);
 app.use(apiRoute, signup);
