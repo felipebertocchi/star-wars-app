@@ -11,7 +11,7 @@ export default function HomePage() {
             <h1 style={{color: 'white'}}>Home Page</h1>
             <Grid container direction="row" justifyContent="space-evenly">
                 <Category image={imageUrl1} title={'Personajes'} path={'/character'}/>
-                <Category image={imageUrl2} title={'Planetas'} path={routes.planet}/>
+                <Category image={imageUrl2} title={'Planetas'} path={'/planet'}/>
                 <Category image={imageUrl3} title={'Películas'} path={routes.film}/>
             </Grid>
         </div>

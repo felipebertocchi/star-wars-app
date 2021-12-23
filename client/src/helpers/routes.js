@@ -3,7 +3,8 @@ const routes = {
     login : '/login',
     character : '/character',
     planet : '/planet',
-    film : '/film'
+    film : '/film',
+    charDetail : '/character/:charId',
 }
 
 export default routes;

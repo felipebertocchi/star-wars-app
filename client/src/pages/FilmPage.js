@@ -9,7 +9,7 @@ export default function FilmPage( {data} ) {
             <Grid container>
                 {data.map((films, i) => {
                     return (
-                        <SimpleCard key={i} data={films}/>
+                        <SimpleCard key={i} data={films} goesTo={'/film/'}/>
                     )
                 })}
             </Grid>

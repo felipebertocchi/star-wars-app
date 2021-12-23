@@ -8,7 +8,7 @@ export default function PlanetPage( {data} ) {
             <Grid container>
                 {data.map((planets, i) => {
                     return (
-                        <SimpleCard key={i} data={planets}/>
+                        <SimpleCard key={i} data={planets} goesTo={'/planet/'}/>
                     )
                 })}
             </Grid>

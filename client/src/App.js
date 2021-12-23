@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 // import Layout from '../components/layouts/Layout';
 import routes from './helpers/routes';
 import axios from 'axios';
+import CharDetailPage from './pages/CharDetailPage';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -53,8 +54,9 @@ function App() {
           <Route exact path={routes.login} component={Login} />
 
           <Route exact path={routes.character}>
-            <CharPage data={people} />
+            <CharPage data={people}/>
           </Route>
+          <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
           <Route exact path={routes.planet}>
             <PlanetPage data={planets} />
           </Route>

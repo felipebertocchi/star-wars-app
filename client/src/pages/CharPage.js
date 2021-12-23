@@ -8,7 +8,7 @@ export default function CharPage( {data} ) {
             <Grid container>
                 {data.map((people, i) => {
                     return (
-                        <SimpleCard key={i} data={people}/>
+                        <SimpleCard key={i} data={people} goesTo={'/character/'}/>
                     )
                 })}
             </Grid>
