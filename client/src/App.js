@@ -13,6 +13,7 @@ import routes from './helpers/routes';
 import axios from 'axios';
 import CharDetailPage from './pages/CharDetailPage';
 import PlanetDetailPage from './pages/PlanetDetailPage';
+import FilmDetailPage from './pages/FilmDetailPage';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -58,13 +59,16 @@ function App() {
             <CharPage data={people}/>
           </Route>
           <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
+          
           <Route exact path={routes.planet}>
             <PlanetPage data={planets} />
           </Route>
           <Route exact path={routes.planetDetail} render={(props) => <PlanetDetailPage {...props} />} />
+
           <Route exact path={routes.film}>
             <FilmPage data={films} />
           </Route>
+          <Route exact path={routes.filmDetail} render={(props) => <FilmDetailPage {...props} />} />
 
           <Route path="*" component={NotFoundPage} />
         </Switch>

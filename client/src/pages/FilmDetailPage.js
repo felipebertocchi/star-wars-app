@@ -4,26 +4,18 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export default function CharDetailPage(props) {
-    const id = props.match.params.charId
-    const [char, setChar] = useState([]);
-    const [homeworld, setHW] = useState([]);
+export default function FilmDetailPage(props) {
+    const id = props.match.params.filmId
+    const [film, setFilm] = useState([]);
     useEffect(() => {
-        async function fetchChar() {
-            axios.get('http://localhost:8080/v1/character?id=' + id)
+        async function fetchFilm() {
+            axios.get('http://localhost:8080/v1/filmlist/' + id)
                 .then(resp => {
-                    setChar(resp.data.result.properties);
-                });
-        }
-        async function fetchHW() {
-            axios.get('http://localhost:8080/v1/planet/' + id)
-                .then(resp => {
-                    setHW(resp.data.result.properties);
+                    setFilm(resp.data.result.properties);
                 });
         }
 
-        fetchChar();
-        fetchHW();
+        fetchFilm();
     }, [])
 
     const useStyles = makeStyles((theme) => ({
@@ -37,7 +29,7 @@ export default function CharDetailPage(props) {
             maxWidth: '70vw'
         },
         image: {
-            margin: 'auto 50px 70px',
+            margin: '40px 50px 70px',
             width: 256,
             height: 256,
         },
@@ -49,6 +41,7 @@ export default function CharDetailPage(props) {
         },
     }));
     const classes = useStyles();
+    const imgPlaceholder = 'https://cdn-icons-png.flaticon.com/512/122/122197.png'
     const preventDefault = (event) => event.preventDefault();
     return (
         <div className={classes.root}>
@@ -56,38 +49,29 @@ export default function CharDetailPage(props) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image} disabled>
-                            <img className={classes.img} alt="complex" src="https://www.pinclipart.com/picdir/big/157-1578186_user-profile-default-image-png-clipart.png" />
+                            <img className={classes.img} alt="complex" src={imgPlaceholder} />
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="h6">
-                                    {char.name}
+                                    {film.title}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Born: {char.birth_year}
+                                    Director: {film.director}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Homeworld: <Link href="#" onClick={preventDefault}>{homeworld.name}</Link>
+                                    Characters:
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Gender: {char.gender}
+                                    Producers: {film.producer}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Hair color: {char.hair_color}
+                                    Released: {film.release_date}
                                 </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Eye color: {char.eye_color}
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Skin color: {char.skin_color}
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Height: {char.height} cm
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Mass: {char.mass} kg
+                                <Typography variant="caption" gutterBottom>
+                                    {film.opening_crawl}
                                 </Typography>
                             </Grid>
                         </Grid>

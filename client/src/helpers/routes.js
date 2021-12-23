@@ -6,6 +6,7 @@ const routes = {
     film : '/film',
     charDetail : '/character/:charId',
     planetDetail : '/planet/:planetId',
+    filmDetail : '/film/:filmId',
 }
 
 export default routes;

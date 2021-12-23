@@ -29,7 +29,7 @@ export default function PlanetDetailPage(props) {
             maxWidth: '70vw'
         },
         image: {
-            margin: 'auto 50px 70px',
+            margin: '40px 50px 70px',
             width: 256,
             height: 256,
         },
@@ -48,7 +48,7 @@ export default function PlanetDetailPage(props) {
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
-                        <ButtonBase className={classes.image}>
+                        <ButtonBase className={classes.image} disabled>
                             <img className={classes.img} alt="complex" src={imgPlaceholder} />
                         </ButtonBase>
                     </Grid>
@@ -62,10 +62,10 @@ export default function PlanetDetailPage(props) {
                                     Gravity: {planet.gravity}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Known Residents: <Link href="#" onClick={preventDefault}> [placeholder] </Link>
+                                    Population: {planet.population}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Population: {planet.population}
+                                    Known Residents:
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
                                     Climate: {planet.climate}
@@ -74,7 +74,7 @@ export default function PlanetDetailPage(props) {
                                     Terrain: {planet.terrain}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Surface water: {planet.surface_water}
+                                    Surface water: {planet.surface_water}%
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
                                     Diameter: {planet.diameter} km
