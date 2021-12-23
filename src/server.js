@@ -16,8 +16,8 @@ const apiRoute = '/v1'
 const people = require('./routes/people'); // Lista de personajes
 const homeworld = require('./routes/homeworld'); // Planeta natal
 const appearsOn = require('./routes/appearsOn'); // Peliculas donde aparece
-const planets = require('./routes/planets');
-const films = require('./routes/films');
+const planetlist = require('./routes/planetlist'); // Lista de planetas, se puede usar un param ID para uno especifico
+const filmlist = require('./routes/filmlist'); // Lista de peliculas, se puede usar un param ID para una especifica
 const signup = require('./routes/signup');
 const login = require('./routes/login');
 const favorite = require('./routes/favorite');
@@ -28,8 +28,8 @@ app.use(cors());
 app.use(apiRoute, people);
 app.use(apiRoute, homeworld);
 app.use(apiRoute, appearsOn);
-app.use(apiRoute, planets);
-app.use(apiRoute, films);
+app.use(apiRoute, planetlist);
+app.use(apiRoute, filmlist);
 app.use(apiRoute, signup);
 app.use(apiRoute, login);
 app.use(apiRoute, favorite);
