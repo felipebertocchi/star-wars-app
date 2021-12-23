@@ -12,6 +12,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import routes from './helpers/routes';
 import axios from 'axios';
 import CharDetailPage from './pages/CharDetailPage';
+import PlanetDetailPage from './pages/PlanetDetailPage';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -27,14 +28,14 @@ function App() {
     }
 
     async function fetchPlanets() {
-      axios.get('http://localhost:8080/v1/planet')
+      axios.get('http://localhost:8080/v1/planetlist')
         .then(resp => {
           setPlanets(resp.data.results);
         });
     }
 
     async function fetchFilms() {
-      axios.get('http://localhost:8080/v1/film')
+      axios.get('http://localhost:8080/v1/filmlist')
         .then(resp => {
           setFilms(resp.data.result);
         });
@@ -60,6 +61,7 @@ function App() {
           <Route exact path={routes.planet}>
             <PlanetPage data={planets} />
           </Route>
+          <Route exact path={routes.planetDetail} render={(props) => <PlanetDetailPage {...props} />} />
           <Route exact path={routes.film}>
             <FilmPage data={films} />
           </Route>

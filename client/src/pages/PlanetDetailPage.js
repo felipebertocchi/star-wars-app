@@ -4,26 +4,18 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export default function CharDetailPage(props) {
-    const id = props.match.params.charId
-    const [char, setChar] = useState([]);
-    const [homeworld, setHW] = useState([]);
+export default function PlanetDetailPage(props) {
+    const id = props.match.params.planetId
+    const [planet, setPlanet] = useState([]);
     useEffect(() => {
-        async function fetchChar() {
-            axios.get('http://localhost:8080/v1/character?id=' + id)
+        async function fetchPlanet() {
+            axios.get('http://localhost:8080/v1/planetlist/' + id)
                 .then(resp => {
-                    setChar(resp.data.result.properties);
-                });
-        }
-        async function fetchHW() {
-            axios.get('http://localhost:8080/v1/planet/' + id)
-                .then(resp => {
-                    setHW(resp.data.result.properties);
+                    setPlanet(resp.data.result.properties);
                 });
         }
 
-        fetchChar();
-        fetchHW();
+        fetchPlanet();
     }, [])
 
     const useStyles = makeStyles((theme) => ({
@@ -49,6 +41,7 @@ export default function CharDetailPage(props) {
         },
     }));
     const classes = useStyles();
+    const imgPlaceholder = 'https://www.pngrepo.com/png/27276/512/planet.png'
     const preventDefault = (event) => event.preventDefault();
     return (
         <div className={classes.root}>
@@ -56,38 +49,41 @@ export default function CharDetailPage(props) {
                 <Grid container spacing={2}>
                     <Grid item>
                         <ButtonBase className={classes.image}>
-                            <img className={classes.img} alt="complex" src="https://www.pinclipart.com/picdir/big/157-1578186_user-profile-default-image-png-clipart.png" />
+                            <img className={classes.img} alt="complex" src={imgPlaceholder} />
                         </ButtonBase>
                     </Grid>
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="h6">
-                                    {char.name}
+                                    {planet.name}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Born: {char.birth_year}
+                                    Gravity: {planet.gravity}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Homeworld: <Link href="#" onClick={preventDefault}>{homeworld.name}</Link>
+                                    Known Residents: <Link href="#" onClick={preventDefault}> [placeholder] </Link>
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Gender: {char.gender}
+                                    Population: {planet.population}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Hair color: {char.hair_color}
+                                    Climate: {planet.climate}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Eye color: {char.eye_color}
+                                    Terrain: {planet.terrain}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Skin color: {char.skin_color}
+                                    Surface water: {planet.surface_water}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Height: {char.height} cm
+                                    Diameter: {planet.diameter} km
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Mass: {char.mass} kg
+                                    Rotation period: {planet.rotation_period} days
+                                </Typography>
+                                <Typography variant="subtitle1" gutterBottom>
+                                    Orbital period: {planet.orbital_period} days
                                 </Typography>
                             </Grid>
                         </Grid>
