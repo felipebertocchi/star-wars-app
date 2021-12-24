@@ -7,9 +7,8 @@ export default function HomePage() {
     const imageUrl2 = 'https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80'
     const imageUrl3 = 'https://images.unsplash.com/photo-1518331539918-7a2dbf839306?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80'
     return (
-        <div>
-            <h1 style={{color: 'white'}}>Home Page</h1>
-            <Grid container direction="row" justifyContent="space-evenly">
+        <div style={{width:'90%', margin:'0 auto'}}>
+            <Grid container justifyContent="space-evenly">
                 <Category image={imageUrl1} title={'Personajes'} path={'/character'}/>
                 <Category image={imageUrl2} title={'Planetas'} path={'/planet'}/>
                 <Category image={imageUrl3} title={'Películas'} path={routes.film}/>

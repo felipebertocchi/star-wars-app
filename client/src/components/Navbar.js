@@ -11,11 +11,11 @@ export default function NavBar() {
         <div>
             <AppBar position="static" style={{ background: '#2E3B55' }}>
                 <Toolbar>
-                    <Grid container direction="row" justifyContent="space-between">
-                        <IconButton edge="start" color="inherit" aria-label="menu">
+                    <Grid container justifyContent='space-between'>
+                        <IconButton color="inherit" aria-label="menu">
                             <MenuIcon />
                         </IconButton>
-                        <div>
+                        <div style={{margin:'10px auto'}}>
                             <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' height='70' align='center'/>
                         </div>
                         {/* <Button color="inherit">

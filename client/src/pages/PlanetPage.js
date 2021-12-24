@@ -4,14 +4,16 @@ import SimpleCard from '../components/Card'
 export default function PlanetPage( {data} ) {
     return (
         <>
-            <h1 style={{color: 'white'}}> Planetas </h1>
-            <Grid container>
-                {data.map((planets, i) => {
-                    return (
-                        <SimpleCard key={i} data={planets} goesTo={'/planet/'}/>
-                    )
-                })}
-            </Grid>
+            <div style={{width:'80%', margin:'0 auto'}}>
+                <h1 style={{color: 'white'}}> Planetas </h1>
+                <Grid container>
+                    {data.map((planets, i) => {
+                        return (
+                            <SimpleCard key={i} data={planets} goesTo={'/planet/'}/>
+                        )
+                    })}
+                </Grid>
+            </div>
         </>
     )
 }

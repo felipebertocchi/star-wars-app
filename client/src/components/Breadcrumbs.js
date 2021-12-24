@@ -10,6 +10,7 @@ const Breadcrumbs = props => {
     paper: {
         padding: 12,
         margin: '40px',
+        marginLeft: '120px',
         maxWidth: 'fit-content'
     }
 }));

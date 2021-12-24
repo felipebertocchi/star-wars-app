@@ -49,33 +49,35 @@ function App() {
   }, [])
   return (
     <div className="App">
-      <NavBar />
-      <Router>
-        {/* <Layout> */}
-        <Breadcrumbs/>
-        <Switch>
-          <Route exact path={routes.home} component={HomePage} />
-          <Route exact path={routes.login} component={Login} />
-
-          <Route exact path={routes.character}>
-            <CharPage data={people}/>
-          </Route>
-          <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
-
-          <Route exact path={routes.planet}>
-            <PlanetPage data={planets} />
-          </Route>
-          <Route exact path={routes.planetDetail} render={(props) => <PlanetDetailPage {...props} />} />
-
-          <Route exact path={routes.film}>
-            <FilmPage data={films} />
-          </Route>
-          <Route exact path={routes.filmDetail} render={(props) => <FilmDetailPage {...props} />} />
-
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
-        {/* </Layout> */}
-      </Router>
+        <Router>
+        <NavBar />
+          {/* <Layout> */}
+          <Breadcrumbs/>
+          <div>
+            <Switch>
+              <Route exact path={routes.home} component={HomePage} />
+              <Route exact path={routes.login} component={Login} />
+    
+              <Route exact path={routes.character}>
+                <CharPage data={people}/>
+              </Route>
+              <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
+    
+              <Route exact path={routes.planet}>
+                <PlanetPage data={planets} />
+              </Route>
+              <Route exact path={routes.planetDetail} render={(props) => <PlanetDetailPage {...props} />} />
+    
+              <Route exact path={routes.film}>
+                <FilmPage data={films} />
+              </Route>
+              <Route exact path={routes.filmDetail} render={(props) => <FilmDetailPage {...props} />} />
+    
+              <Route path="*" component={NotFoundPage} />
+            </Switch>
+          </div>
+          {/* </Layout> */}
+        </Router>
     </div>
   );
 }
