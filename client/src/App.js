@@ -14,6 +14,7 @@ import axios from 'axios';
 import CharDetailPage from './pages/CharDetailPage';
 import PlanetDetailPage from './pages/PlanetDetailPage';
 import FilmDetailPage from './pages/FilmDetailPage';
+import Breadcrumbs from './components/Breadcrumbs';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -51,6 +52,7 @@ function App() {
       <NavBar />
       <Router>
         {/* <Layout> */}
+        <Breadcrumbs/>
         <Switch>
           <Route exact path={routes.home} component={HomePage} />
           <Route exact path={routes.login} component={Login} />
@@ -59,7 +61,7 @@ function App() {
             <CharPage data={people}/>
           </Route>
           <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
-          
+
           <Route exact path={routes.planet}>
             <PlanetPage data={planets} />
           </Route>
