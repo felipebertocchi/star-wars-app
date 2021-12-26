@@ -18,7 +18,7 @@ const Breadcrumbs = props => {
   return (
       <Paper className={classes.paper}>
         <BreadC aria-label="breadcrumb">
-          <Link href="/" onClick={() => history.push('/')} underline='none'>Home</Link>
+          <Link href="#" onClick={() => history.push('/')} underline='none'>Home</Link>
           {pathnames.map((name, index) => {
             const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
             const isLast = (index === pathnames.length - 1)

@@ -7,11 +7,13 @@ export default function CharPage( {data} ) {
             <div style={{width:'80%', margin:'0 auto'}}>
                 <h1 style={{color: 'white'}}> Personajes </h1>
                     <Grid container>
-                        {data.map((people, i) => {
-                            return (
-                                <SimpleCard key={i} data={people} goesTo={'/character/'}/>
-                            )
-                        })}
+                        <Grid container>
+                            {data.map((people, i) => {
+                                return (
+                                    <SimpleCard key={i} data={people} goesTo={'/character/'}/>
+                                )
+                            })}
+                        </Grid>
                     </Grid>
             </div>
         </>
