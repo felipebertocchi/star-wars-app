@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-
+const verify = require('../auth/verifyToken');
 const router = express.Router();
 
-router.get('/character', (req, res) => {
+router.get('/character', verify, (req, res) => {
     let id = req.query.id;
     let name = req.query.name;
     if (id !== undefined) {

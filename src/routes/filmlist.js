@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-
+const verify = require('../auth/verifyToken');
 const router = express.Router();
 
-router.get('/filmlist', (req, res) => {
+router.get('/filmlist', verify, (req, res) => {
     axios.get('https://www.swapi.tech/api/films')
         .then(resp => {
             res.send(resp.data);

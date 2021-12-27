@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios');
-
+const verify = require('../auth/verifyToken');
 const router = express.Router();
 
-router.get('/residents/:planetId', (req, res) => {
+router.get('/residents/:planetId', verify, (req, res) => {
     let planetId = req.params.planetId;
 
     axios.get('http://localhost:8080/v1/planetlist/' + planetId)
