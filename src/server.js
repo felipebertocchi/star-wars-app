@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path'); 
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -25,8 +26,14 @@ const login = require('./auth/login');
 const signup = require('./auth/signup');
 
 // MIDDLEWARE
+app.use(cookieParser());
+app.use(cors({
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    origin: ['http://localhost:3000']
+}));
 app.use(express.json());
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(apiRoute, people);
 app.use(apiRoute, homeworld);
 app.use(apiRoute, appearsOn);
