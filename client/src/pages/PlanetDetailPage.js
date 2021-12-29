@@ -27,7 +27,7 @@ export default function PlanetDetailPage(props) {
         }
 
         fetchPlanet();
-    })
+    }, [])
 
     const useStyles = makeStyles((theme) => ({
         root: {
