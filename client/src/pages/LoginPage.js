@@ -18,7 +18,6 @@ export default function Login() {
     }
 
     if (user) {
-        console.log("GO BACK HOMEEEEE")
         routeChange('/');
     }
 
