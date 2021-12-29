@@ -15,13 +15,20 @@ import PlanetDetailPage from './pages/PlanetDetailPage';
 import FilmDetailPage from './pages/FilmDetailPage';
 import Breadcrumbs from './components/Breadcrumbs';
 import { UserContext } from "./components/UserContext";
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 axios.defaults.withCredentials = true;
 
 function App() {
   const [user, setUser] = useState(null)
   const providerValue = useMemo(() => ({user, setUser}), [user, setUser]);
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("currentUser");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser);
+    }
+  }, []);
 
   return (
     <div className="App">

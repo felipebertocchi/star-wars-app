@@ -32,6 +32,7 @@ export default function Login() {
         })
         .then(function (response) {
             setUser(response.data);
+            localStorage.setItem("currentUser",JSON.stringify(response.data));
             routeChange('/');
         })
         .catch(function (error) {

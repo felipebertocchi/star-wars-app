@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
 
     // Creamos y asignamos un token
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, {expiresIn: '1h'});
-    res.cookie('token', token, {expires: new Date(Date.now() + 900000), httpOnly: true});
+    res.cookie('token', token, {maxAge: 3600000, httpOnly: true});
 
     return res.send({id: user._id, name: user.name, email: user.email});
 

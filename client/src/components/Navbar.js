@@ -15,6 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { UserContext } from './UserContext';
 import SearchBar from './SearchBar';
+import UserMenu from './UserMenu';
 
 const drawerWidth = 350;
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
   const classes = useStyles();
-  const { user, setUser } = useContext(UserContext)
+  const { user } = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const history = useHistory();
 
@@ -59,12 +60,13 @@ export default function NavBar() {
                 <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' height='70' align='center' />
               </Link>
             </div>
-
             { user ? <SearchBar /> : ("")}
             { user ? (
               <Button color="inherit">
-                {user.name}
-                <AccountCircleIcon fontSize='large' style={{ marginLeft: '8px' }} />
+                <UserMenu>
+                  {user.name}
+                  <AccountCircleIcon fontSize='large' style={{ marginLeft: '8px' }} />
+                </UserMenu>
               </Button>
             ) : (
               <Button color="inherit">
