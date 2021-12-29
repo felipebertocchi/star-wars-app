@@ -4,7 +4,7 @@ const verify = require('../auth/verifyToken');
 const router = express.Router();
 
 router.get('/planetlist', verify, (req, res) => {
-    axios.get('https://www.swapi.tech/api/planets')
+    axios.get('https://www.swapi.tech/api/planets?page=1&limit=null')
         .then(resp => {
             res.send(resp.data);
         });

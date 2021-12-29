@@ -17,7 +17,7 @@ router.get('/character', verify, (req, res) => {
             res.send(resp.data);
         });
     } else {
-        axios.get('https://www.swapi.tech/api/people')
+        axios.get('https://www.swapi.tech/api/people?page=1&limit=null')
         .then(resp => {
             res.send(resp.data);
         });
