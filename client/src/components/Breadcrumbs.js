@@ -8,30 +8,32 @@ const Breadcrumbs = props => {
   const pathnames = pathname.split('/').filter(x => x);
   const useStyles = makeStyles(() => ({
     paper: {
-        padding: 12,
-        margin: '40px',
+        padding: 10,
+        margin: '34px',
         marginLeft: '120px',
         maxWidth: 'fit-content'
+    },
+    font: {
+        fontSize: 16
     }
 }));
   const classes = useStyles();
   return (
       <Paper className={classes.paper}>
         <BreadC aria-label="breadcrumb">
-          <Link href="#" onClick={() => history.push('/')} underline='none'>Home</Link>
+          <Link className={classes.font} component="button" onClick={() => history.push('/')} underline='none'>Home</Link>
           {pathnames.map((name, index) => {
             const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
             const isLast = (index === pathnames.length - 1)
             return ( isLast ? (
-              <Typography>
+              <Typography className={classes.font}>
                 {name}
               </Typography>
               ) : (
-              <Link href="#" onClick={() => history.push(routeTo)} underline='none'>{name}</Link>
+              <Link className={classes.font} component="button" onClick={() => history.push(routeTo)} underline='none'>{name}</Link>
               )
             )
           })}
-          {/* Los href no cumplen funcion alguna mas que para que aparezca el puntero de una mano selectora cuando se hace hover. */}
         </BreadC>
       </Paper>
   );

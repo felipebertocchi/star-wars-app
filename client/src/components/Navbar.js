@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import {AppBar, Grid, Toolbar, IconButton, Button, Drawer, Divider, Link} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -12,6 +12,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { UserContext } from './UserContext';
 
 const drawerWidth = 350;
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +31,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar() {
     const classes = useStyles();
+    const {user, setUser} = useContext(UserContext)
     const [open, setOpen] = useState(false);
+    const history = useHistory();
+
+    const routeChange = (path) =>{
+        history.push(path);
+    }
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -46,13 +54,20 @@ export default function NavBar() {
                             <MenuIcon onClick={handleDrawerOpen} fontSize='large'/>
                         </IconButton>
                         <div style={{margin:'10px auto'}}>
-                            <Link component='a' to='/favorites'>
+                            <Link component='button'>
                                 <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' height='70' align='center'/>
                             </Link>
                         </div>
-                        <Button color="inherit">
-                            Login
-                        </Button>
+                        { user ? (
+                            <Button color="inherit">
+                                {user.name}
+                                <AccountCircleIcon fontSize='large' style={{marginLeft:'8px'}}/>
+                            </Button>
+                        ) : (
+                            <Button color="inherit">
+                                Login
+                            </Button>
+                        )}
                     </Grid>
                 </Toolbar>
             </AppBar>

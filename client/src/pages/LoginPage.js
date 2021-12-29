@@ -1,18 +1,25 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import { Grid, Paper, Avatar, TextField, Button } from '@material-ui/core'
+import { UserContext } from '../components/UserContext';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import axios from 'axios';
 
 export default function Login() {
-    const paperStyle={padding:"60px 40px", width:300, margin:"40px auto"}
+    const paperStyle={padding:"45px 35px", width:300, margin:"40px auto"}
     const avatarStyle={backgroundColor:'purple'}
-    const formStyle={height:'60%', }
+    const formStyle={marginTop: '20px'}
     const history = useHistory();
+    const { user, setUser } = useContext(UserContext)
 
     const routeChange = (path) =>{
         history.push(path);
+    }
+
+    if (user) {
+        console.log("GO BACK HOMEEEEE")
+        routeChange('/');
     }
 
     const [formValue, setformValue] = useState({email: '', password: ''});
@@ -25,7 +32,7 @@ export default function Login() {
             password: formValue.password
         })
         .then(function (response) {
-            console.log(response);
+            setUser(response.data);
             routeChange('/');
         })
         .catch(function (error) {
@@ -46,10 +53,10 @@ export default function Login() {
                 <Grid height={1} align='center'>
                     <Avatar style={avatarStyle}><VpnKeyIcon/></Avatar>
                     <h2>Iniciar Sesión</h2>
-                    <form style={formStyle} onSubmit={handleSubmit} noValidate autoComplete="off">
-                        <TextField onChange={handleChange} id="outlined-basic" label="Email" variant="outlined" fullWidth required type='email' name='email' value={formValue.email}/>
-                        <TextField onChange={handleChange} id="outlined-basic" label="Contraseña" variant="outlined" fullWidth required type='password' name='password' value={formValue.password}/>
-                        <Button type='submit' variant='contained' color='primary' fullWidth>Iniciar Sesión</Button>
+                    <form onSubmit={handleSubmit} noValidate autoComplete="off">
+                        <TextField style={formStyle} onChange={handleChange} id="outlined-basic" label="Email" variant="outlined" fullWidth required type='email' name='email' value={formValue.email}/>
+                        <TextField style={formStyle} onChange={handleChange} id="outlined-basic" label="Contraseña" variant="outlined" fullWidth required type='password' name='password' value={formValue.password}/>
+                        <Button style={formStyle} type='submit' variant='contained' color='primary' fullWidth>Iniciar Sesión</Button>
                     </form>
                 </Grid>
             </Paper>

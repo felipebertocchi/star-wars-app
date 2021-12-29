@@ -4,7 +4,6 @@ const User = require('../models/User');
 const Joi = require('joi');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const axios = require('axios');
 
 const schema = Joi.object({
     email: Joi.string().min(6).max(255).email().required(),
@@ -28,7 +27,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, {expiresIn: '1h'});
     res.cookie('token', token, {expires: new Date(Date.now() + 900000), httpOnly: true});
 
-    return res.send("Success!")
+    return res.send({id: user._id, name: user.name, email: user.email});
 
 });
 module.exports = router;

@@ -1,10 +1,21 @@
 import { Grid, Paper, Typography, ButtonBase, Link } from '@material-ui/core'
-import { useState, useEffect } from 'react'
-import axios from 'axios';
+import { useState, useEffect, useContext } from 'react'
+import { useHistory } from "react-router-dom";
+import { UserContext } from '../components/UserContext';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios';
 
 
 export default function FilmDetailPage(props) {
+    const {user} = useContext(UserContext)
+    const history = useHistory();
+
+    const routeChange = (path) =>{
+        history.push(path);
+    }
+    if (!user) {
+        routeChange('/login');
+    }
     const id = props.match.params.filmId
     const [film, setFilm] = useState([]);
     useEffect(() => {
