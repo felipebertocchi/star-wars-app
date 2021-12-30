@@ -32,17 +32,6 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
-
 export default function CustomizedMenus() {
   const history = useHistory();
   const { user, setUser } = useContext(UserContext)
@@ -56,7 +45,11 @@ export default function CustomizedMenus() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
+  const handleFav = () => {
+    setAnchorEl(null);
+    history.push('/favorite')
+  };
 
   const handleLogout = () => {
     setUser(null);
@@ -70,7 +63,7 @@ export default function CustomizedMenus() {
         aria-controls="customized-menu"
         aria-haspopup="true"
         variant="contained"
-        color="primary"
+        color="inherit"
         onClick={handleClick}
       >
         {user.name}
@@ -83,18 +76,18 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem onClick={() => history.push('/favorite')}>
+        <MenuItem onClick={handleFav}>
           <ListItemIcon>
             <FavoriteIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Favorites" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleLogout}>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <ExitToAppIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary="Logout" />
-        </StyledMenuItem>
+        </MenuItem>
       </StyledMenu>
     </div>
   );
