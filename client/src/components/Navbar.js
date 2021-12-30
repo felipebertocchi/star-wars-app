@@ -39,6 +39,7 @@ export default function NavBar() {
 
   const routeChange = (path) => {
     history.push(path);
+    setOpen(false);
   }
 
   const handleDrawerOpen = () => {
@@ -52,15 +53,17 @@ export default function NavBar() {
       <AppBar position="static" className={classes.appBar} style={{ background: '#2E3B55', zIndex: '10' }}>
         <Toolbar>
           <Grid container justifyContent='space-between'>
+          { user ? (
             <IconButton color="inherit" aria-label="menu">
               <MenuIcon onClick={handleDrawerOpen} fontSize='large' />
             </IconButton>
+          ) : (<></>)}
             <div style={{ margin: '10px auto' }}>
               <Link component='button'>
-                <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' height='70' align='center' />
+                <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' alt='star-wars-logo' height='70' align='center' />
               </Link>
             </div>
-            { user ? <SearchBar /> : ("")}
+            { user ? <SearchBar /> : (<></>)}
             { user ? (
               <Button color="inherit">
                 <UserMenu>
@@ -80,25 +83,25 @@ export default function NavBar() {
         <div style={{ width: '250px', marginTop: '30px', overflow: 'auto' }}>
           <Divider />
           <List>
-            <ListItem button component={Link} to={'/favorites'}>
+            <ListItem button onClick={()=>{routeChange('/favorite')}}>
               <ListItemIcon>
                 <FavoriteIcon />
               </ListItemIcon>
               <ListItemText primary='Favorites' />
             </ListItem>
-            <ListItem button component={Link} to={'/character'}>
+            <ListItem button onClick={()=>{routeChange('/character')}}>
               <ListItemIcon>
                 <PeopleAltIcon />
               </ListItemIcon>
               <ListItemText primary='Characters' />
             </ListItem>
-            <ListItem button component={Link} to={'/plantet'}>
+            <ListItem button onClick={()=>{routeChange('/planet')}}>
               <ListItemIcon>
                 <PublicIcon />
               </ListItemIcon>
               <ListItemText primary='Planets' />
             </ListItem>
-            <ListItem button component={Link} to={'/film'}>
+            <ListItem button onClick={()=>{routeChange('/film')}}>
               <ListItemIcon>
                 <MovieIcon />
               </ListItemIcon>
