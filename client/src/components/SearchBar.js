@@ -94,8 +94,8 @@ export default function SearchBar() {
   const history = useHistory();
 
   const routeChange = (charId) =>{
-    history.push('/character/' + charId);
     setFilteredData([]);
+    history.push('/character/' + charId);
   }
 
   const classes = useStyles();
@@ -122,7 +122,7 @@ export default function SearchBar() {
             <div className={classes.dataResult}>
               {filteredData.slice(0, 5).map((char, key) => {
                 return (
-                <ListItem button className={classes.dataItem} onClick={()=>{routeChange(char.id)}}>
+                <ListItem button className={classes.dataItem} onClick={()=>{routeChange(char.uid)}}>
                   {char.name}
                 </ListItem>
                 );
