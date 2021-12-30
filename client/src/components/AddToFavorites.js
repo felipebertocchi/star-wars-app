@@ -2,16 +2,20 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import axios from 'axios';
 import { useState, useEffect } from 'react'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function AddToFavorites(props) {
+    const [loading, setLoading] = useState(false);
     const [isUserFavorite, setIsUserFavorite] = useState(false);
 
     useEffect(() => {
         async function fetchFavorites() {
-        const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
-        let isUserFavorite = ( (resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false)) 
-        console.log("is user favorite?", isUserFavorite)
-        setIsUserFavorite(isUserFavorite);
+            setLoading(true);
+            const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
+            let isUserFavorite = ( (resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false)) 
+            console.log("is user favorite?", isUserFavorite)
+            setIsUserFavorite(isUserFavorite);
+            setLoading(false);
         }
         fetchFavorites();
     }, [props])
@@ -55,13 +59,21 @@ export default function AddToFavorites(props) {
     }
 
     return (
-        <div>
-            { isUserFavorite ? (
-                    <FavoriteIcon onClick={()=>{handleUnfavorite(props)}}/>
+        <>
+            {(loading) ? (
+                <>
+                    <CircularProgress color="primary" size={20}/>
+                </>
                 ) : (
-                    <FavoriteBorderIcon onClick={()=>{handleFavorite(props)}}/>
-                )
-            }
-        </div>
+                <>
+                    { isUserFavorite ? (
+                            <FavoriteIcon onClick={()=>{handleUnfavorite(props)}}/>
+                        ) : (
+                            <FavoriteBorderIcon onClick={()=>{handleFavorite(props)}}/>
+                        )
+                    }
+                </>
+            )}
+        </>
     )
 }

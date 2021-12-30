@@ -4,9 +4,11 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from '../components/UserContext';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function PlanetDetailPage(props) {
+    const [loading, setLoading] = useState(false);
     const {user} = useContext(UserContext)
     const history = useHistory();
 
@@ -20,9 +22,11 @@ export default function PlanetDetailPage(props) {
     const [planet, setPlanet] = useState([]);
     useEffect(() => {
         async function fetchPlanet() {
+            setLoading(true);
             axios.get('http://localhost:8080/v1/planetlist/' + id)
                 .then(resp => {
                     setPlanet(resp.data.result.properties);
+                    setLoading(false);
                 });
         }
 
@@ -55,6 +59,11 @@ export default function PlanetDetailPage(props) {
     const imgPlaceholder = 'https://www.pngrepo.com/png/27276/512/planet.png'
     return (
         <div className={classes.root}>
+            {(loading) ? (
+                <Backdrop open={true}>
+                    <CircularProgress color="primary" />
+                </Backdrop>
+            ) : (
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
@@ -105,6 +114,7 @@ export default function PlanetDetailPage(props) {
                     </Grid>
                 </Grid>
             </Paper>
+            )}
         </div>
     )
 }

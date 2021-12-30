@@ -5,8 +5,11 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../components/UserContext';
 import axios from 'axios';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function CharPage() {
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext)
   const history = useHistory();
 
@@ -23,8 +26,10 @@ export default function CharPage() {
 
   useEffect(() => {
     async function fetchPeople() {
-    const resp = await axios.get('http://localhost:8080/v1/character')
-    setPeople(resp.data.results);
+      setLoading(true);
+      const resp = await axios.get('http://localhost:8080/v1/character')
+      setPeople(resp.data.results);
+      setLoading(false);
     }
     fetchPeople();
   }, [])
@@ -42,17 +47,21 @@ export default function CharPage() {
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h1 style={{ color: 'white' }}> Personajes </h1>
         <Grid container>
-          <Grid container>
+          {(loading) ? (
+            <Backdrop open={true}>
+              <CircularProgress color="primary" />
+            </Backdrop>
+          ) : (<>
             {currentPeople.map((char, i) => {
               return (
                 <SimpleCard key={i} data={char} goesTo={'/character/'} />
               )
             })}
-          </Grid>
+            <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
+              <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
+            </div>
+          </>)}
         </Grid>
-        <div style={{backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px'}}>
-          <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages}/>
-        </div>
       </div>
     </>
   )

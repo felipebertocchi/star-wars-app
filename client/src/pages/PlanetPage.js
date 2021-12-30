@@ -5,9 +5,11 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../components/UserContext';
 import axios from 'axios';
-
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function PlanetPage() {
+  const [loading, setLoading] = useState(false);
   const { user } = useContext(UserContext)
   const history = useHistory();
 
@@ -24,8 +26,10 @@ export default function PlanetPage() {
 
   useEffect(() => {
     async function fetchPlanets() {
+    setLoading(true);
     const resp = await axios.get('http://localhost:8080/v1/planetlist')
     setPlanets(resp.data.results);
+    setLoading(false);
     }
     fetchPlanets();
   }, [])
@@ -43,15 +47,21 @@ export default function PlanetPage() {
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h1 style={{ color: 'white' }}> Planetas </h1>
         <Grid container>
-          {currentPlanets.map((planet, i) => {
+          {(loading) ? (
+            <Backdrop open={true}>
+              <CircularProgress color="primary" />
+            </Backdrop>
+          ) : (<>
+            {currentPlanets.map((planet, i) => {
             return (
               <SimpleCard key={i} data={planet} goesTo={'/planet/'} />
             )
-          })}
+            })}
+            <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
+              <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
+            </div>
+          </>)}
         </Grid>
-        <div style={{backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px'}}>
-          <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages}/>
-        </div>
       </div>
     </>
   )

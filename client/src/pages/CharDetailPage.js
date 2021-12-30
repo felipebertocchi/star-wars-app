@@ -5,9 +5,11 @@ import { UserContext } from '../components/UserContext';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import AddToFavorites from '../components/AddToFavorites';
-
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function CharDetailPage(props) {
+    const [loading, setLoading] = useState(false);
     const {user} = useContext(UserContext)
     const history = useHistory();
 
@@ -17,11 +19,13 @@ export default function CharDetailPage(props) {
     if (!user) {
         routeChange('/login');
     }
+
     const charId = props.match.params.charId
     const [char, setChar] = useState([]);
     const [homeworld, setHW] = useState([]);
     useEffect(() => {
         async function fetchChar() {
+            setLoading(true);
             axios.get('http://localhost:8080/v1/character?id=' + charId)
                 .then(resp => {
                     setChar(resp.data.result.properties);
@@ -31,9 +35,9 @@ export default function CharDetailPage(props) {
             axios.get('http://localhost:8080/v1/planet/' + charId)
                 .then(resp => {
                     setHW(resp.data.result.properties);
+                    setLoading(false);
                 });
         }
-
         fetchChar();
         fetchHW();
     }, [])
@@ -64,6 +68,11 @@ export default function CharDetailPage(props) {
     const preventDefault = (event) => event.preventDefault();
     return (
         <div className={classes.root}>
+            {(loading) ? (
+                <Backdrop open={true}>
+                    <CircularProgress color="primary" />
+                </Backdrop>
+            ) : (
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
                     <Grid item>
@@ -112,6 +121,7 @@ export default function CharDetailPage(props) {
                     </Grid>
                 </Grid>
             </Paper>
+            )}
         </div>
     )
 }

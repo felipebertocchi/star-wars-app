@@ -4,9 +4,12 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../components/UserContext';
 import axios from 'axios';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 export default function FilmPage() {
+    const [loading, setLoading] = useState(false);
     const {user} = useContext(UserContext)
     const history = useHistory();
 
@@ -21,9 +24,11 @@ export default function FilmPage() {
 
     useEffect(() => {
         async function fetchFilms() {
+            setLoading(true);
             axios.get('http://localhost:8080/v1/filmlist')
                 .then(resp => {
                     setFilms(resp.data.result);
+                    setLoading(false);
                 });
             }
             fetchFilms();
@@ -33,11 +38,17 @@ export default function FilmPage() {
             <div style={{width:'80%', margin:'0 auto'}}>
             <h1 style={{color: 'white'}}> Películas </h1>
                 <Grid container>
-                    {films.map((film, i) => {
-                        return (
-                            <SimpleCard key={i} data={film} goesTo={'/film/'}/>
-                        )
-                    })}
+                    {(loading) ? (
+                        <Backdrop open={true}>
+                            <CircularProgress color="primary" />
+                        </Backdrop>
+                    ) : (<>
+                        {films.map((film, i) => {
+                            return (
+                                <SimpleCard key={i} data={film} goesTo={'/film/'}/>
+                            )
+                        })}
+                    </>)}
                 </Grid>
             </div>
         </>
