@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../components/UserContext';
 import axios from 'axios';
+import { Button } from '@material-ui/core'
 
 
 export default function FavoritesPage() {
@@ -21,18 +22,27 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     async function fetchFavorites() {
-    const resp = await axios.get('http://localhost:8080/v1/favorite')
-    setFavorites(resp.data.results);
+    const resp = await axios.get('http://localhost:8080/v1/favorite/' + user.id)
+    console.log(resp)
+    setFavorites(resp.data);
     }
     fetchFavorites();
-  }, [])
+  }, [user])
+
 
   return (
     <>
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h1 style={{ color: 'white' }}> Favoritos de {user.name} </h1>
-        <Grid container>
-          {favorites.map((fav, i) => {
+        <Grid container justifyContent='center'>
+        {(favorites.length === 0) ? (
+            <div style={{textAlign: 'center'}}>
+              <h4 style={{ color: 'white' }}>No se han asignado favoritos todavia...</h4>
+              <Button variant="contained" color="secondary" onClick={()=>routeChange('/character')}>Explorar personajes</Button>
+            </div>
+          ) : (<div></div>)
+          }
+            {favorites.map((fav, i) => {
             return (
               <SimpleCard key={i} data={fav} goesTo={'/character/'} />
             )

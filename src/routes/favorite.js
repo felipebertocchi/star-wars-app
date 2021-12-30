@@ -2,9 +2,20 @@ const express = require('express');
 const router = express.Router();
 const verify = require('../auth/verifyToken');
 const User = require('../models/User');
+const axios = require('axios');
 
-router.get('/favorite', async (req, res) => {
 
+router.get('/favorite/:userid', async (req, res) => {
+    const user = await User.findById(req.params.userid);
+    const userFavs = user.favorites;
+    axios.get('https://www.swapi.tech/api/people?page=1&limit=null')
+        .then(resp => {
+            const respArray = []
+            for (let i = 0; i < userFavs.length; i++) {
+                respArray.push.apply(respArray, resp.data.results.filter(x => x.uid === userFavs[i].charId))
+            }
+            res.send(respArray);
+        });
 });
 
 
@@ -40,7 +51,7 @@ router.delete('/favorite', async (req, res) => {
     }
     user.save()
 
-    res.status(200)
+    res.status(200).json({ success:true });
 
 })
 
