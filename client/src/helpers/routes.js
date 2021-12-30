@@ -7,6 +7,7 @@ const routes = {
     charDetail : '/character/:charId',
     planetDetail : '/planet/:planetId',
     filmDetail : '/film/:filmId',
+    favorite : '/favorite',
 }
 
 export default routes;

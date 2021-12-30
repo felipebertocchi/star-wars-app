@@ -122,7 +122,7 @@ export default function SearchBar() {
             <div className={classes.dataResult}>
               {filteredData.slice(0, 5).map((char, key) => {
                 return (
-                <ListItem button className={classes.dataItem} >
+                <ListItem button className={classes.dataItem} onClick={()=>{routeChange(char.id)}}>
                   {char.name}
                 </ListItem>
                 );

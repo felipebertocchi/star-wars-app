@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -43,6 +44,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 export default function CustomizedMenus() {
+  const history = useHistory();
   const { user, setUser } = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -54,10 +56,12 @@ export default function CustomizedMenus() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
 
   const handleLogout = () => {
     setUser(null);
     localStorage.clear();
+    history.push('/');
   };
 
   return (
@@ -79,7 +83,7 @@ export default function CustomizedMenus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem onClick={() => history.push('/favorite')}>
           <ListItemIcon>
             <FavoriteIcon fontSize="small" />
           </ListItemIcon>

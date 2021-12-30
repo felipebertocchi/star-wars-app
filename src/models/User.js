@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
         min: 6,
         max: 1024
     },
+    favorites: {
+        type: [],
+        default: []
+    },
     date: {
         type: Date,
         default: Date.now

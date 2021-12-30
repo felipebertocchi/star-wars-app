@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from '../components/UserContext';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import AddToFavorites from '../components/AddToFavorites';
 
 
 export default function CharDetailPage(props) {
@@ -16,18 +17,18 @@ export default function CharDetailPage(props) {
     if (!user) {
         routeChange('/login');
     }
-    const id = props.match.params.charId
+    const charId = props.match.params.charId
     const [char, setChar] = useState([]);
     const [homeworld, setHW] = useState([]);
     useEffect(() => {
         async function fetchChar() {
-            axios.get('http://localhost:8080/v1/character?id=' + id)
+            axios.get('http://localhost:8080/v1/character?id=' + charId)
                 .then(resp => {
                     setChar(resp.data.result.properties);
                 });
         }
         async function fetchHW() {
-            axios.get('http://localhost:8080/v1/planet/' + id)
+            axios.get('http://localhost:8080/v1/planet/' + charId)
                 .then(resp => {
                     setHW(resp.data.result.properties);
                 });
@@ -103,8 +104,9 @@ export default function CharDetailPage(props) {
                             </Grid>
                         </Grid>
                         <Grid item>
+                            <AddToFavorites userFrom={user.id} charId={charId}/>
                             <Typography variant="h6">
-                                #{id}
+                                #{charId}
                             </Typography>
                         </Grid>
                     </Grid>

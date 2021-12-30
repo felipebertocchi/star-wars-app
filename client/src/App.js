@@ -13,6 +13,7 @@ import axios from 'axios';
 import CharDetailPage from './pages/CharDetailPage';
 import PlanetDetailPage from './pages/PlanetDetailPage';
 import FilmDetailPage from './pages/FilmDetailPage';
+import FavoritesPage from './pages/FavoritesPage';
 import Breadcrumbs from './components/Breadcrumbs';
 import { UserContext } from "./components/UserContext";
 import { useState, useMemo, useEffect } from 'react'
@@ -55,6 +56,7 @@ function App() {
                 <Route exact path={routes.charDetail} render={(props) => <CharDetailPage {...props} />} />
                 <Route exact path={routes.planetDetail} render={(props) => <PlanetDetailPage {...props} />} />
                 <Route exact path={routes.filmDetail} render={(props) => <FilmDetailPage {...props} />} />
+                <Route exact path={routes.favorite} render={(props) => <FavoritesPage {...props} />} />
       
                 <Route path="*" component={NotFoundPage} />
             </Switch>
