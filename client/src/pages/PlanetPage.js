@@ -26,10 +26,10 @@ export default function PlanetPage() {
 
   useEffect(() => {
     async function fetchPlanets() {
-    setLoading(true);
-    const resp = await axios.get('http://localhost:8080/v1/planetlist')
-    setPlanets(resp.data.results);
-    setLoading(false);
+      setLoading(true);
+      const resp = await axios.get('http://localhost:8080/v1/planetlist')
+      setPlanets(resp.data.results);
+      setLoading(false);
     }
     fetchPlanets();
   }, [])
@@ -46,22 +46,22 @@ export default function PlanetPage() {
     <>
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h1 style={{ color: 'white' }}> Planetas </h1>
-        <Grid container>
-          {(loading) ? (
-            <Backdrop open={true}>
-              <CircularProgress color="primary" />
-            </Backdrop>
-          ) : (<>
+        {(loading) ? (
+          <Backdrop open={true}>
+            <CircularProgress color="primary" />
+          </Backdrop>
+        ) : (<>
+          <Grid container>
             {currentPlanets.map((planet, i) => {
-            return (
-              <SimpleCard key={i} data={planet} goesTo={'/planet/'} />
-            )
+              return (
+                <SimpleCard key={i} data={planet} goesTo={'/planet/'} />
+              )
             })}
-            <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
-              <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
-            </div>
-          </>)}
-        </Grid>
+          </Grid>
+          <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
+            <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
+          </div>
+        </>)}
       </div>
     </>
   )

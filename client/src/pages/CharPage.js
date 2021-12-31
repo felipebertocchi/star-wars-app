@@ -46,22 +46,22 @@ export default function CharPage() {
     <>
       <div style={{ width: '80%', margin: '0 auto' }}>
         <h1 style={{ color: 'white' }}> Personajes </h1>
-        <Grid container>
-          {(loading) ? (
-            <Backdrop open={true}>
-              <CircularProgress color="primary" />
-            </Backdrop>
-          ) : (<>
+        {(loading) ? (
+          <Backdrop open={true}>
+            <CircularProgress color="primary" />
+          </Backdrop>
+        ) : (<>
+          <Grid container>
             {currentPeople.map((char, i) => {
               return (
                 <SimpleCard key={i} data={char} goesTo={'/character/'} />
               )
             })}
-            <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
-              <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
-            </div>
-          </>)}
-        </Grid>
+          </Grid>
+          <div style={{ backgroundColor: 'white', margin: '20px auto', width: 'fit-content', borderRadius: '100px' }}>
+            <Pagination count={numPages} page={currentPage} onChange={handleChange} shape="round" color="primary" siblingCount={numPages} />
+          </div>
+        </>)}
       </div>
     </>
   )
