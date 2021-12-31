@@ -19,7 +19,6 @@ const Breadcrumbs = props => {
   }));
   const classes = useStyles();
   const atHome = (window.location.pathname === '/' || window.location.pathname === '/login')
-  console.log("currently at home? ", atHome)
 
   if (atHome) {
     return <></>

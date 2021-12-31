@@ -13,7 +13,6 @@ export default function AddToFavorites(props) {
             setLoading(true);
             const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
             let isUserFavorite = ( (resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false)) 
-            console.log("is user favorite?", isUserFavorite)
             setIsUserFavorite(isUserFavorite);
             setLoading(false);
         }

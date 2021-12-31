@@ -39,7 +39,6 @@ export default function CharDetailPage(props) {
     }
     async function fetchCharFilms() {
       const resp = await axios.get('http://localhost:8080/v1/film/' + charId)
-      console.log("Character Films:", resp.data)
       setCharFilms(resp.data);
     }
     fetchChar();
@@ -102,18 +101,20 @@ export default function CharDetailPage(props) {
                     </Link>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
-                    <strong>Appears on:</strong>
-                    <ul>
-                      {charFilms.map((film, i) => {
-                        return (
-                          <li>
-                            <Link key={i} className={classes.font} component="button" onClick={() => routeChange('/film/' + film.uid)}>
-                              {film.properties.title}
-                            </Link>
-                          </li>
-                        )
-                      })}
-                    </ul>
+                    <div style={{display:'flex'}}>
+                      <strong>Appears on:</strong>
+                      <ul>
+                        {charFilms.map((film, i) => {
+                          return (
+                            <li>
+                              <Link key={i} className={classes.font} component="button" onClick={() => routeChange('/film/' + film.uid)}>
+                                {film.properties.title}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     <strong>Gender:</strong> {char.gender}
