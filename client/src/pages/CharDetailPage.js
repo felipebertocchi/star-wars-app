@@ -23,6 +23,7 @@ export default function CharDetailPage(props) {
     const charId = props.match.params.charId
     const [char, setChar] = useState([]);
     const [homeworld, setHW] = useState([]);
+    const [homeworldId, setHWId] = useState([]);
     useEffect(() => {
         async function fetchChar() {
             setLoading(true);
@@ -34,13 +35,16 @@ export default function CharDetailPage(props) {
         async function fetchHW() {
             axios.get('http://localhost:8080/v1/planet/' + charId)
                 .then(resp => {
-                    setHW(resp.data.result.properties);
+                    console.log("PLANET DATA: ",resp.data.result.properties.name)
+                    console.log("PLANET ID: ",resp.data.result.uid)
+                    setHW(resp.data.result.properties.name);
+                    setHWId(resp.data.result.uid);
                     setLoading(false);
                 });
         }
         fetchChar();
         fetchHW();
-    }, [])
+    }, [charId])
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -63,9 +67,12 @@ export default function CharDetailPage(props) {
             maxWidth: '100%',
             maxHeight: '100%',
         },
+        font: {
+            fontSize: 16,
+            fontWeight: 'bold'
+        }
     }));
     const classes = useStyles();
-    const preventDefault = (event) => event.preventDefault();
     return (
         <div className={classes.root}>
             {(loading) ? (
@@ -83,32 +90,34 @@ export default function CharDetailPage(props) {
                     <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
-                                <Typography gutterBottom variant="h6">
+                                <Typography gutterBottom variant="h5">
                                     {char.name}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Born: {char.birth_year}
+                                    <strong>Born:</strong> {char.birth_year}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Homeworld: <Link href="#" onClick={preventDefault}>{homeworld.name}</Link>
+                                    <strong>Homeworld:</strong> <Link className={classes.font} component="button" onClick={() => routeChange('/planet/'+homeworldId)}>
+                                        {homeworld}
+                                        </Link>
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Gender: {char.gender}
+                                    <strong>Gender:</strong> {char.gender}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Hair color: {char.hair_color}
+                                    <strong>Hair color:</strong> {char.hair_color}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Eye color: {char.eye_color}
+                                    <strong>Eye color:</strong> {char.eye_color}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Skin color: {char.skin_color}
+                                    <strong>Skin color:</strong> {char.skin_color}
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Height: {char.height} cm
+                                    <strong>Height:</strong> {char.height} cm
                                 </Typography>
                                 <Typography variant="subtitle1" gutterBottom>
-                                    Mass: {char.mass} kg
+                                    <strong>Mass:</strong> {char.mass} kg
                                 </Typography>
                             </Grid>
                         </Grid>
