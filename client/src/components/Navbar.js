@@ -59,7 +59,7 @@ export default function NavBar() {
             </IconButton>
           ) : (<></>)}
             <div style={{ margin: '10px auto' }}>
-              <Link component='button'>
+              <Link component='button' onClick={()=>{routeChange('/')}}>
                 <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' alt='star-wars-logo' height='70' align='center' />
               </Link>
             </div>
