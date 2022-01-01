@@ -8,102 +8,125 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function FilmDetailPage(props) {
-    const [loading, setLoading] = useState(false);
-    const {user} = useContext(UserContext)
-    const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const { user } = useContext(UserContext)
+  const history = useHistory();
 
-    const routeChange = (path) =>{
-        history.push(path);
+  const routeChange = (path) => {
+    history.push(path);
+  }
+  if (!user) {
+    routeChange('/login');
+  }
+  const filmId = props.match.params.filmId
+  const [film, setFilm] = useState([]);
+  const [filmCharacters, setFilmCharacters] = useState([]);
+  useEffect(() => {
+    async function fetchFilm() {
+      setLoading(true);
+      axios.get('http://localhost:8080/v1/filmlist/' + filmId)
+        .then(resp => {
+          setFilm(resp.data.result.properties);
+        });
     }
-    if (!user) {
-        routeChange('/login');
+    async function fetchFilmCharacters() {
+      axios.get('http://localhost:8080/v1//filmcharacters/' + filmId)
+        .then(resp => {
+          console.log(resp.data)
+          setFilmCharacters(resp.data);
+          setLoading(false);
+        });
     }
-    const id = props.match.params.filmId
-    const [film, setFilm] = useState([]);
-    useEffect(() => {
-        async function fetchFilm() {
-            setLoading(true);
-            axios.get('http://localhost:8080/v1/filmlist/' + id)
-                .then(resp => {
-                    setFilm(resp.data.result.properties);
-                    setLoading(false);
-                });
-        }
+    fetchFilm();
+    fetchFilmCharacters();
+  }, [filmId])
 
-        fetchFilm();
-    }, [])
-
-    const useStyles = makeStyles((theme) => ({
-        root: {
-            flexGrow: 1,
-        },
-        paper: {
-            padding: theme.spacing(2),
-            margin: '40px auto',
-            minWidth: 500,
-            maxWidth: '70vw'
-        },
-        image: {
-            margin: '40px 50px 70px',
-            width: 256,
-            height: 256,
-        },
-        img: {
-            margin: 'auto',
-            display: 'block',
-            maxWidth: '100%',
-            maxHeight: '100%',
-        },
-    }));
-    const classes = useStyles();
-    const imgPlaceholder = 'https://cdn-icons-png.flaticon.com/512/122/122197.png'
-    const preventDefault = (event) => event.preventDefault();
-    return (
-        <div className={classes.root}>
-            {(loading) ? (
-                <Backdrop open={true}>
-                    <CircularProgress color="primary" />
-                </Backdrop>
-            ) : (
-            <Paper className={classes.paper}>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <ButtonBase className={classes.image} disabled>
-                            <img className={classes.img} alt="complex" src={imgPlaceholder} />
-                        </ButtonBase>
-                    </Grid>
-                    <Grid item xs={12} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                            <Grid item xs>
-                                <Typography gutterBottom variant="h6">
-                                    {film.title}
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Director: {film.director}
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Characters:
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Producers: {film.producer}
-                                </Typography>
-                                <Typography variant="subtitle1" gutterBottom>
-                                    Released: {film.release_date}
-                                </Typography>
-                                <Typography variant="caption" gutterBottom>
-                                    {film.opening_crawl}
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                        <Grid item>
-                            <Typography variant="h6">
-                                #{id}
-                            </Typography>
-                        </Grid>
-                    </Grid>
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: '40px auto',
+      minWidth: 500,
+      maxWidth: '70vw'
+    },
+    image: {
+      margin: '40px 50px 70px',
+      width: 256,
+      height: 256,
+    },
+    img: {
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100%',
+    },
+    font: {
+      fontSize: 16,
+    }
+  }));
+  const classes = useStyles();
+  const imgPlaceholder = 'https://cdn-icons-png.flaticon.com/512/122/122197.png'
+  return (
+    <div className={classes.root}>
+      {(loading) ? (
+        <Backdrop open={true}>
+          <CircularProgress color="primary" />
+        </Backdrop>
+      ) : (
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase className={classes.image} disabled>
+                <img className={classes.img} alt="complex" src={imgPlaceholder} />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={12} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h6">
+                    {film.title}
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    <strong>Director:</strong> {film.director}
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    <strong>Producers</strong>: {film.producer}
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    <strong>Released</strong>: {film.release_date}
+                  </Typography>
+                  <Typography variant="caption" gutterBottom>
+                    {film.opening_crawl}
+                  </Typography>
+                  <Typography variant="subtitle1" gutterBottom>
+                    <div style={{ display: 'flex' }}>
+                      <strong>Characters:</strong>
+                      <ul>
+                        {filmCharacters.map((filmChar, i) => {
+                          return (
+                            <li>
+                              <Link key={i} className={classes.font} component="button" onClick={() => routeChange('/character/' + filmChar.charId)}>
+                                {filmChar.charName}
+                              </Link>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </div>
+                  </Typography>
                 </Grid>
-            </Paper>
-            )}
-        </div>
-    )
+              </Grid>
+              <Grid item>
+                <Typography variant="h6">
+                  #{filmId}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      )}
+    </div>
+  )
 }
