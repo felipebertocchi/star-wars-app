@@ -18,6 +18,7 @@ const people = require('./routes/people'); // Lista de personajes
 const homeworld = require('./routes/homeworld'); // Planeta natal
 const appearsOn = require('./routes/appearsOn'); // Peliculas donde aparece
 const planetlist = require('./routes/planetlist'); // Lista de planetas, se puede usar un param ID para uno especifico
+const residents = require('./routes/residents'); // Lista de personajes que nacieron en determinado planeta
 const filmlist = require('./routes/filmlist'); // Lista de peliculas, se puede usar un param ID para una especifica
 const filmcharacters = require('./routes/filmcharacters'); // Lista de personajes que aparecen en una pelicula
 const favorite = require('./routes/favorite');
@@ -39,6 +40,7 @@ app.use(apiRoute, people);
 app.use(apiRoute, homeworld);
 app.use(apiRoute, appearsOn);
 app.use(apiRoute, planetlist);
+app.use(apiRoute, residents);
 app.use(apiRoute, filmlist);
 app.use(apiRoute, filmcharacters);
 app.use(apiRoute, favorite);
