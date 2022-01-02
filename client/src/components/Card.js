@@ -29,7 +29,7 @@ export default function SimpleCard({data, goesTo}) {
     history.push(goesTo + data.uid);
   }
   return (
-    <Card className={classes.root}>
+    <Card data-test-id="card" className={classes.root}>
       <CardActionArea onClick={routeChange}>
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>

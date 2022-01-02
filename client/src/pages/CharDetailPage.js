@@ -86,21 +86,21 @@ export default function CharDetailPage(props) {
                 <img className={classes.img} alt="complex" src="https://www.pinclipart.com/picdir/big/157-1578186_user-profile-default-image-png-clipart.png" />
               </ButtonBase>
             </Grid>
-            <Grid item xs={12} sm container>
+            <Grid data-test-id="character" item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
-                  <Typography gutterBottom variant="h5">
+                  <Typography data-test-id="character-name" gutterBottom variant="h5">
                     {char.name}
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     <strong>Born:</strong> {char.birth_year}
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="character-homeworld" variant="subtitle1" gutterBottom>
                     <strong>Homeworld:</strong> <Link className={classes.font} component="button" onClick={() => routeChange('/planet/' + homeworldId)}>
                       {homeworld}
                     </Link>
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="character-films" variant="subtitle1" gutterBottom>
                     <div style={{display:'flex'}}>
                       <strong>Appears on:</strong>
                       <ul>

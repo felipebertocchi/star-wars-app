@@ -58,7 +58,7 @@ export default function CustomizedMenus() {
   };
 
   return (
-    <div style={{display: 'flex', height: '60px', lineHeight: '60px'}} >
+    <div data-test-id="user-menu" style={{display: 'flex', height: '60px', lineHeight: '60px'}} >
       <div
         aria-controls="customized-menu"
         aria-haspopup="true"

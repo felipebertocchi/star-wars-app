@@ -55,11 +55,11 @@ export default function NavBar() {
           <Grid container justifyContent='space-between'>
           { user ? (
             <IconButton color="inherit" aria-label="menu">
-              <MenuIcon onClick={handleDrawerOpen} fontSize='large' />
+              <MenuIcon data-test-id="appbar-menu" onClick={handleDrawerOpen} fontSize='large' />
             </IconButton>
           ) : (<></>)}
             <div style={{ margin: '10px auto' }}>
-              <Link component='button' onClick={()=>{routeChange('/')}}>
+              <Link data-test-id="appbar-logo" component='button' onClick={()=>{routeChange('/')}}>
                 <img src='http://pngimg.com/uploads/star_wars_logo/star_wars_logo_PNG11.png' alt='star-wars-logo' height='70' align='center' />
               </Link>
             </div>
@@ -83,25 +83,25 @@ export default function NavBar() {
         <div style={{ width: '250px', marginTop: '30px', overflow: 'auto' }}>
           <Divider />
           <List>
-            <ListItem button onClick={()=>{routeChange('/favorite')}}>
+            <ListItem data-test-id="appbar-menu-favorites" button onClick={()=>{routeChange('/favorite')}}>
               <ListItemIcon>
                 <FavoriteIcon />
               </ListItemIcon>
               <ListItemText primary='Favorites' />
             </ListItem>
-            <ListItem button onClick={()=>{routeChange('/character')}}>
+            <ListItem data-test-id="appbar-menu-characters" button onClick={()=>{routeChange('/character')}}>
               <ListItemIcon>
                 <PeopleAltIcon />
               </ListItemIcon>
               <ListItemText primary='Characters' />
             </ListItem>
-            <ListItem button onClick={()=>{routeChange('/planet')}}>
+            <ListItem data-test-id="appbar-menu-planets" button onClick={()=>{routeChange('/planet')}}>
               <ListItemIcon>
                 <PublicIcon />
               </ListItemIcon>
               <ListItemText primary='Planets' />
             </ListItem>
-            <ListItem button onClick={()=>{routeChange('/film')}}>
+            <ListItem data-test-id="appbar-menu-films" button onClick={()=>{routeChange('/film')}}>
               <ListItemIcon>
                 <MovieIcon />
               </ListItemIcon>

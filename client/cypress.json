@@ -1,0 +1,12 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "apiUrl": "http://localhost:8080/v1",
+    "testFiles": [
+        "login.spec.js",
+        "home.spec.js",
+        "character.spec.js",
+        "planet.spec.js",
+        "film.spec.js"
+    ],
+    "experimentalSessionSupport": true
+}

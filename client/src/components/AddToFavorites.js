@@ -66,9 +66,9 @@ export default function AddToFavorites(props) {
                 ) : (
                 <>
                     { isUserFavorite ? (
-                            <FavoriteIcon onClick={()=>{handleUnfavorite(props)}}/>
+                            <FavoriteIcon data-test-id="favorite-button" onClick={()=>{handleUnfavorite(props)}}/>
                         ) : (
-                            <FavoriteBorderIcon onClick={()=>{handleFavorite(props)}}/>
+                            <FavoriteBorderIcon data-test-id="favorite-button" onClick={()=>{handleFavorite(props)}}/>
                         )
                     }
                 </>

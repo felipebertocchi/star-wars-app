@@ -26,7 +26,7 @@ export default function Category({image,title,desc,path}) {
   }
   
   return (
-    <Card className={classes.root}>
+    <Card data-test-id="category-card" className={classes.root}>
       <CardActionArea onClick={routeChange}>
         <CardMedia
           className={classes.media}
