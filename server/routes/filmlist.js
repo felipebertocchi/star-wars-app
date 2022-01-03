@@ -10,7 +10,7 @@ router.get('/filmlist', verify, (req, res) => {
         });
 });
 
-router.get('/filmlist/:filmId', (req, res) => {
+router.get('/filmlist/:filmId', verify, (req, res) => {
     let id = req.params.filmId;
     axios.get('https://www.swapi.tech/api/films/' + id)
         .then(resp => {

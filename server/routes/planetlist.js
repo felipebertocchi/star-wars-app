@@ -10,7 +10,7 @@ router.get('/planetlist', verify, (req, res) => {
         });
 });
 
-router.get('/planetlist/:planetId', (req, res) => {
+router.get('/planetlist/:planetId', verify, (req, res) => {
     let id = req.params.planetId;
     axios.get('https://www.swapi.tech/api/planets/' + id)
         .then(resp => {

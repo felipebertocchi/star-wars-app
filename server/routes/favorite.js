@@ -5,7 +5,7 @@ const User = require('../models/User');
 const axios = require('axios');
 
 
-router.get('/favorite/:userid', async (req, res) => {
+router.get('/favorite/:userid', verify, async (req, res) => {
     const user = await User.findById(req.params.userid);
     const userFavs = user.favorites;
     axios.get('https://www.swapi.tech/api/people?page=1&limit=null')

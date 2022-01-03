@@ -3,7 +3,7 @@ const axios = require('axios');
 const verify = require('../auth/verifyToken');
 const router = express.Router();
 
-router.get('/filmcharacters/:filmId', (req, res) => {
+router.get('/filmcharacters/:filmId', verify, (req, res) => {
   let id = req.params.filmId;
   axios.get('https://www.swapi.tech/api/films/' + id)
     .then(resp => {
