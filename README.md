@@ -13,6 +13,7 @@ Una aplicación que muestra los personajes, los planetas y las películas de Sta
   - [Setup del proyecto](#setup-del-proyecto)
   - [Configuración de entorno](#configuración-de-entorno)
 - [Uso](#uso)
+- [Backend](#backend)
 - [Testing](#testing)
 - [Reflexiones](#reflexiones)
 - [Carpetas del proyecto](#carpetas-del-proyecto)
@@ -93,10 +94,15 @@ Si intentamos alguna acción, vemos que la API no funciona bien porque todavía 
 Incluí un archivo llamado `.env.example` que contiene las variables de entorno para poder conectarse a un cluster de MongoDB que ya contiene usuarios registrados. **Es importante que este archivo se renombre a `.env` y este presente dentro de la carpeta del server de Express.**
 Claro no es la mejor práctica pero quería ahorrar el tener que configurar una base de datos cada vez que se clone el repositorio, además de requerir que se registre un usuario propio. 
 
-Por último, abre otra terminal y ejecuta lo siguiente (asegúrate de estar en la carpeta principal del proyecto, `star-wars-app/`)
+Por último, abre otra terminal y ejecuta lo siguiente para iniciar el servidor de Express (asegúrate de estar en la carpeta principal del proyecto, `star-wars-app/`)
   ```
   npm start
   ```
+Si todo marchó bien, debería responder con las siguientes líneas
+> Server on port 8080
+> 
+> MongoDB connected successfully
+
 
 Ahora si, ya puedes visitar la App y loguearte desde:
   ```
@@ -107,17 +113,20 @@ Si lo deseas, también puedes ingresar a los endpoints del backend desde:
   ```
   http://localhost:8080
   ```
-> Para esto último recomiendo la aplicación [Postman](https://www.postman.com/) para realizar distintos tipos de request con un body, esto será necesario para acceder a la mayoría ya que requiere un login. Puedes ver los distintos endpoint (aquí)
+> Para esto último recomiendo la aplicación [Postman](https://www.postman.com/) para realizar distintos tipos de request con un body, esto será necesario para acceder a la mayoría ya que requiere un login. Puedes ver los distintos endpoint (aquí)[#backend]
 <p align="right"><a href="#top">Volver arriba</a></p>
 
 ## Uso
 
 Cuando accedas a la aplicación por primera vez te pedirá iniciar sesión.
 Puedes usar los siguientes datos para entrar:
-```
-    Email: luke@jedi.com
-    Contraseña: admin123
-```
+
+> **Email:**
+>  `luke@jedi.com`
+> 
+> **Contraseña:**
+>  `admin123`
+
 
 Una vez se ingresa a la aplicación, se puede seleccionar entre las 3 categorías mostradas en la página principal: Personajes, Planetas o Películas.
 
@@ -136,6 +145,39 @@ Finalmente, se puede hacer la busqueda de un personaje particular, haciendo clic
 Recuerden también que se pueden acceder tanto a los favoritos como a las 3 secciones mediante el menu del appbar, haciendo click en el botón en la esquina superior izquierda.
 <p align="right"><a href="#top">Volver arriba</a></p>
 
+## Backend
+A continuación se muestran los diferentes endpoints creados
+
+La ruta base para la API es la siguiente:
+
+`http://localhost:8080/v1`
+
+- POST `/login`: Logueo con email y contraseña.
+    - > El body debe ser por ej: {
+    "email":"luke@jedi.com",
+    "password":"admin123"
+}  
+- POST `/signup`: Registro de usuario con nombre, email y contraseña (No accesible desde el frontend)
+    - > El body debe ser por ej: {
+    "name": "Luke Skywalker",
+    "email":"luke@jedi.com",
+    "password":"admin123"
+}
+- GET `/character`: Devuelve la lista de todos los personajes.
+- GET `/planetlist`: Devuelve la lista de todos los planetas.
+- GET `/filmlist`: Devuelve la lista de todas las películas.
+- GET `/planet/:character`: A partir del id de un personaje, obtiene el planeta de donde procede.
+- GET `/film/:character`: A partir del id de un personaje, obtiene las peliculas en las cuales aparece.
+- GET `/character/?id=`: Devuelve un personaje según su id.
+- GET `/character/?name=`: Devuelve un personaje según su numbre.
+- GET `/residents/:planetId`: Devuelve una lista de personas que nacieron en un mismo planeta. (No accesible desde el frontend, lanza un error de status 429 Too many requests, referido en [Reflexiones](#reflexiones)
+- POST `/favorite`: Agrega un personaje a la lista de favoritos del usuario.
+- DELETE `/favorite`: Quita un personaje de la lista de favoritos del usuario.
+
+> Recomiendo la aplicación [Postman](https://www.postman.com/) para realizar estos tipos de request.
+
+<p align="right"><a href="#top">Volver arriba</a></p>
+
 ## Testing
 
 Para el testing opté por usar el framework [Cypress](https://www.cypress.io/). Es muy util para realizar pruebas de integración, y provee las siguientes características:
@@ -146,7 +188,7 @@ Para el testing opté por usar el framework [Cypress](https://www.cypress.io/). 
 
 
 > Asegúrate de que la aplicación este funcionando, teniendo encendidos ambos servidores de React y Express
-> 
+
 Para abrir el Test Suite de Cypress:  
   ```
   npm test
