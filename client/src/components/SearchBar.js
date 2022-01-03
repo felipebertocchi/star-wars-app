@@ -68,15 +68,14 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchPeople() {
-      const resp = await axios.get('http://localhost:8080/v1/character')
-      setData(resp.data.results);
-    }
-    fetchPeople();
-  }, [])
-
+  async function fetchPeople() {
+    setLoading(true)
+    const resp = await axios.get('http://localhost:8080/v1/character')
+    setData(resp.data.results);
+    setLoading(false)
+  }
 
   const handleFilter = (event) => {
     const searchWord = event.target.value;
@@ -108,21 +107,23 @@ export default function SearchBar() {
             <SearchIcon />
           </div>
           <InputBase
+            data-test-id="searchbar-input"
+            onChange={handleFilter}
+            onFocus={() => fetchPeople()}
             placeholder="Search…"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
             }}
             inputProps={{ 'aria-label': 'search' }}
-            onChange={handleFilter}
           />
         </div>
       </div>
       {(filteredData.length > 0) ? (
-        <div className={classes.dataResult} data-testid="getByTestId">
+        <div className={classes.dataResult}>
           {filteredData.slice(0, 5).map((char, key) => {
             return (
-              <ListItem button className={classes.dataItem} onClick={() => { routeChange(char.uid) }}>
+              <ListItem data-test-id="searchbar-result" button className={classes.dataItem} onClick={() => { routeChange(char.uid) }}>
                 {char.name}
               </ListItem>
             );
