@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
@@ -68,13 +68,13 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchBar() {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   async function fetchPeople() {
-    setLoading(true)
+    // setLoading(true)
     const resp = await axios.get('http://localhost:8080/v1/character')
     setData(resp.data.results);
-    setLoading(false)
+    // setLoading(false)
   }
 
   const handleFilter = (event) => {

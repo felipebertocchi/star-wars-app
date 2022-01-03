@@ -54,8 +54,8 @@ export default function Login() {
                     <Avatar style={avatarStyle}><VpnKeyIcon/></Avatar>
                     <h2>Iniciar Sesión</h2>
                     <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                        <TextField data-test-id="login-email" style={formStyle} onChange={handleChange} id="outlined-basic" label="Email" variant="outlined" fullWidth required type='email' name='email' value={formValue.email}/>
-                        <TextField data-test-id="login-password" style={formStyle} onChange={handleChange} id="outlined-basic" label="Contraseña" variant="outlined" fullWidth required type='password' name='password' value={formValue.password}/>
+                        <TextField data-test-id="login-email" style={formStyle} onChange={handleChange} label="Email" variant="outlined" fullWidth required type='email' name='email' value={formValue.email}/>
+                        <TextField data-test-id="login-password" style={formStyle} onChange={handleChange} label="Contraseña" variant="outlined" fullWidth required type='password' name='password' value={formValue.password}/>
                         <Button data-test-id="sign-in" style={formStyle} type='submit' variant='contained' color='primary' fullWidth>Iniciar Sesión</Button>
                     </form>
                 </Grid>

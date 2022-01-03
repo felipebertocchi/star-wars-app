@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography, ButtonBase, Link } from '@material-ui/core'
+import { Grid, Paper, Typography, ButtonBase } from '@material-ui/core'
 import { useState, useEffect, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import { UserContext } from '../components/UserContext';
@@ -27,9 +27,8 @@ export default function PlanetDetailPage(props) {
       setPlanet(resp.data.result.properties);
       setLoading(false);
     }
-
     fetchPlanet();
-  }, [])
+  }, [id])
 
   const useStyles = makeStyles((theme) => ({
     root: {
