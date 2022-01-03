@@ -72,10 +72,11 @@ describe("Characters", () => {
     cy.wait(['@getCharacterInfo','@getCharacterHW','@getCharacterFilms'], {timeout: 25000})
 
     cy.intercept('GET', Cypress.config().apiUrl + '/filmlist/*').as('getFilmInfo')
+    cy.intercept('GET', Cypress.config().apiUrl + '/filmcharacters/*').as('getFilmCharacters')
     cy.get('[data-test-id="character"]').within(() => {
       cy.get('[data-test-id="character-film-link"]').first().click()
     });
-    cy.wait('@getFilmInfo', {timeout: 25000})
+    cy.wait(['@getFilmInfo','@getFilmCharacters'], {timeout: 25000})
     cy.get('[data-test-id="film"]').within(() => {
       cy.get('[data-test-id="film-title"]')
       cy.get('[data-test-id="film-director"]')
