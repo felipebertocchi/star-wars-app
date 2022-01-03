@@ -82,13 +82,13 @@ export default function FilmDetailPage(props) {
                 <img className={classes.img} alt="complex" src={imgPlaceholder} />
               </ButtonBase>
             </Grid>
-            <Grid item xs={12} sm container>
+            <Grid data-test-id="film" item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
-                  <Typography gutterBottom variant="h6">
+                  <Typography data-test-id="film-title" gutterBottom variant="h6">
                     {film.title}
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="film-director" variant="subtitle1" gutterBottom>
                     <strong>Director:</strong> {film.director}
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
@@ -100,14 +100,14 @@ export default function FilmDetailPage(props) {
                   <Typography variant="caption" gutterBottom>
                     {film.opening_crawl}
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="film-characters" variant="subtitle1" gutterBottom>
                     <div style={{ display: 'flex' }}>
                       <strong>Characters:</strong>
                       <ul>
                         {filmCharacters.map((filmChar, i) => {
                           return (
                             <li>
-                              <Link key={i} className={classes.font} component="button" onClick={() => routeChange('/character/' + filmChar.charId)}>
+                              <Link data-test-id="film-characters-link" key={i} className={classes.font} component="button" onClick={() => routeChange('/character/' + filmChar.charId)}>
                                 {filmChar.charName}
                               </Link>
                             </li>
@@ -119,7 +119,7 @@ export default function FilmDetailPage(props) {
                 </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="h6">
+                <Typography data-test-id="film-id" variant="h6">
                   #{filmId}
                 </Typography>
               </Grid>

@@ -6,7 +6,9 @@
         "home.spec.js",
         "character.spec.js",
         "planet.spec.js",
-        "film.spec.js"
+        "film.spec.js",
+        "favorite.spec.js",
+        "searchbar.spec.js"
     ],
     "experimentalSessionSupport": true
 }

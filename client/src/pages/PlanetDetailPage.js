@@ -69,19 +69,19 @@ export default function PlanetDetailPage(props) {
                 <img className={classes.img} alt="complex" src={imgPlaceholder} />
               </ButtonBase>
             </Grid>
-            <Grid item xs={12} sm container>
+            <Grid data-test-id="planet" item xs={12} sm container>
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
-                  <Typography gutterBottom variant="h6">
+                  <Typography data-test-id="planet-name" gutterBottom variant="h6">
                     {planet.name}
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
                     Gravity: {planet.gravity}
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="planet-population" variant="subtitle1" gutterBottom>
                     Population: {planet.population}
                   </Typography>
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography data-test-id="planet-residents" variant="subtitle1" gutterBottom>
                     Known Residents: n/a
                   </Typography>
                   <Typography variant="subtitle1" gutterBottom>
@@ -105,7 +105,7 @@ export default function PlanetDetailPage(props) {
                 </Grid>
               </Grid>
               <Grid item>
-                <Typography variant="h6">
+                <Typography data-test-id="planet-id" variant="h6">
                   #{id}
                 </Typography>
               </Grid>

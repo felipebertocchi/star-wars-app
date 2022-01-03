@@ -46,7 +46,7 @@ export default function FavoritesPage() {
           ) : (
             <>
               {(favorites.length === 0) ? (
-                <div style={{ textAlign: 'center' }}>
+                <div data-test-id="no-favorites" style={{ textAlign: 'center' }}>
                   <h4 style={{ color: 'white' }}>No se han asignado favoritos todavia...</h4>
                   <Button variant="contained" color="secondary" onClick={() => routeChange('/character')}>Explorar personajes</Button>
                 </div>

@@ -96,7 +96,7 @@ export default function CharDetailPage(props) {
                     <strong>Born:</strong> {char.birth_year}
                   </Typography>
                   <Typography data-test-id="character-homeworld" variant="subtitle1" gutterBottom>
-                    <strong>Homeworld:</strong> <Link className={classes.font} component="button" onClick={() => routeChange('/planet/' + homeworldId)}>
+                    <strong>Homeworld:</strong> <Link data-test-id="character-homeworld-link" className={classes.font} component="button" onClick={() => routeChange('/planet/' + homeworldId)}>
                       {homeworld}
                     </Link>
                   </Typography>
@@ -107,7 +107,7 @@ export default function CharDetailPage(props) {
                         {charFilms.map((film, i) => {
                           return (
                             <li>
-                              <Link key={i} className={classes.font} component="button" onClick={() => routeChange('/film/' + film.uid)}>
+                              <Link data-test-id="character-film-link" key={i} className={classes.font} component="button" onClick={() => routeChange('/film/' + film.uid)}>
                                 {film.properties.title}
                               </Link>
                             </li>
@@ -138,7 +138,7 @@ export default function CharDetailPage(props) {
               </Grid>
               <Grid item>
                 <AddToFavorites userFrom={user.id} charId={charId} />
-                <Typography variant="h6">
+                <Typography data-test-id="character-id" variant="h6">
                   #{charId}
                 </Typography>
               </Grid>

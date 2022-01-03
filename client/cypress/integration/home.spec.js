@@ -6,7 +6,6 @@ describe("Home", () => {
   })
 
   it("Should list 3 categories for browsing", () => {
-    cy.login('fake@email.com', 'fakepassword123')
     cy.visit('/');
     cy.url().should('equal', Cypress.config().baseUrl + '/')
 

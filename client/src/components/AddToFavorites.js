@@ -5,74 +5,74 @@ import { useState, useEffect } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default function AddToFavorites(props) {
-    const [loading, setLoading] = useState(false);
-    const [isUserFavorite, setIsUserFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isUserFavorite, setIsUserFavorite] = useState(false);
 
-    useEffect(() => {
-        async function fetchFavorites() {
-            setLoading(true);
-            const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
-            let isUserFavorite = ( (resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false)) 
-            setIsUserFavorite(isUserFavorite);
-            setLoading(false);
-        }
-        fetchFavorites();
-    }, [props])
+  async function fetchFavorites() {
+    setLoading(true);
+    const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
+    let isUserFavorite = ((resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false))
+    setIsUserFavorite(isUserFavorite);
+    setLoading(false);
+  }
+  useEffect(() => {
+    fetchFavorites();
+  }, [])
 
-    const handleFavorite = (props) =>{
+  const handleFavorite = (props) => {
 
-        const variable = {
-            userFrom: props.userFrom,
-            charId: props.charId,
-        }
-
-        axios.post('http://localhost:8080/v1/favorite', variable)
-            .then(res => {
-                // console.log(res)
-                if (res.data.success) {
-                    setIsUserFavorite(true);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    const variable = {
+      userFrom: props.userFrom,
+      charId: props.charId,
     }
 
-    const handleUnfavorite = (props) =>{
-
-        const variable = {
-            userFrom: props.userFrom,
-            charId: props.charId,
+    axios.post('http://localhost:8080/v1/favorite', variable)
+      .then(res => {
+        // console.log(res)
+        if (res.data.success) {
+          setIsUserFavorite(true);
         }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-        axios.delete('http://localhost:8080/v1/favorite', { data:  variable })
-            .then(res => {
-                // console.log(res)
-                if (res.data.success) {
-                    setIsUserFavorite(false);
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+  const handleUnfavorite = (props) => {
+
+    const variable = {
+      userFrom: props.userFrom,
+      charId: props.charId,
     }
 
-    return (
+    axios.delete('http://localhost:8080/v1/favorite', { data: variable })
+      .then(res => {
+        // console.log(res)
+        if (res.data.success) {
+          setIsUserFavorite(false);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  return (
+    <>
+      {(loading) ? (
         <>
-            {(loading) ? (
-                <>
-                    <CircularProgress color="primary" size={20}/>
-                </>
-                ) : (
-                <>
-                    { isUserFavorite ? (
-                            <FavoriteIcon data-test-id="favorite-button" onClick={()=>{handleUnfavorite(props)}}/>
-                        ) : (
-                            <FavoriteBorderIcon data-test-id="favorite-button" onClick={()=>{handleFavorite(props)}}/>
-                        )
-                    }
-                </>
-            )}
+          <CircularProgress color="primary" size={20} />
         </>
-    )
+      ) : (
+        <>
+          {isUserFavorite ? (
+            <FavoriteIcon data-test-id="unfavorite-button" onClick={() => { handleUnfavorite(props) }} />
+          ) : (
+            <FavoriteBorderIcon data-test-id="favorite-button" onClick={() => { handleFavorite(props) }} />
+          )
+          }
+        </>
+      )}
+    </>
+  )
 }
