@@ -4,8 +4,8 @@
   "description": "App de Star Wars. Muestra personajes, de que planeta son y en que películas salieron.",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
     "test": "cd client && npx cypress open"
   },
   "repository": {
