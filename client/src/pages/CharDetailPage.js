@@ -28,17 +28,17 @@ export default function CharDetailPage(props) {
   useEffect(() => {
     async function fetchChar() {
       setLoading(true);
-      const resp = await axios.get('http://localhost:8080/v1/character?id=' + charId)
+      const resp = await axios.get('/v1/character?id=' + charId)
       setChar(resp.data.result.properties);
     }
     async function fetchHW() {
-      const resp = await axios.get('http://localhost:8080/v1/planet/' + charId)
+      const resp = await axios.get('/v1/planet/' + charId)
       setHW(resp.data.result.properties.name);
       setHWId(resp.data.result.uid);
       setLoading(false);
     }
     async function fetchCharFilms() {
-      const resp = await axios.get('http://localhost:8080/v1/film/' + charId)
+      const resp = await axios.get('/v1/film/' + charId)
       setCharFilms(resp.data);
     }
     fetchChar();

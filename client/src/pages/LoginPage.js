@@ -26,7 +26,7 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        axios.post('http://localhost:8080/v1/login', {
+        axios.post('/v1/login', {
             email: formValue.email,
             password: formValue.password
         })

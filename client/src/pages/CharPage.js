@@ -27,7 +27,7 @@ export default function CharPage() {
   useEffect(() => {
     async function fetchPeople() {
       setLoading(true);
-      const resp = await axios.get('http://localhost:8080/v1/character')
+      const resp = await axios.get('/v1/character')
       setPeople(resp.data.results);
       setLoading(false);
     }

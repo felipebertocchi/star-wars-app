@@ -25,7 +25,7 @@ export default function FavoritesPage() {
   useEffect(() => {
     setLoading(true);
     async function fetchFavorites() {
-      const resp = await axios.get('http://localhost:8080/v1/favorite/' + user.id)
+      const resp = await axios.get('/v1/favorite/' + user.id)
       console.log(resp)
       setFavorites(resp.data);
       setLoading(false);

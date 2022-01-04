@@ -25,7 +25,7 @@ export default function FilmPage() {
   useEffect(() => {
     async function fetchFilms() {
       setLoading(true);
-      axios.get('http://localhost:8080/v1/filmlist')
+      axios.get('/v1/filmlist')
         .then(resp => {
           setFilms(resp.data.result);
           setLoading(false);

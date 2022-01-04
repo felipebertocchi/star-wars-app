@@ -23,7 +23,7 @@ export default function PlanetDetailPage(props) {
   useEffect(() => {
     async function fetchPlanet() {
       setLoading(true);
-      const resp = await axios.get('http://localhost:8080/v1/planetlist/' + id)
+      const resp = await axios.get('/v1/planetlist/' + id)
       setPlanet(resp.data.result.properties);
       setLoading(false);
     }

@@ -10,7 +10,7 @@ export default function AddToFavorites(props) {
 
   async function fetchFavorites() {
     setLoading(true);
-    const resp = await axios.get('http://localhost:8080/v1/favorite/' + props.userFrom)
+    const resp = await axios.get('/v1/favorite/' + props.userFrom)
     let isUserFavorite = ((resp.data.filter(x => x.uid === props.charId).length !== 0) ? (true) : (false))
     setIsUserFavorite(isUserFavorite);
     setLoading(false);
@@ -26,7 +26,7 @@ export default function AddToFavorites(props) {
       charId: props.charId,
     }
 
-    axios.post('http://localhost:8080/v1/favorite', variable)
+    axios.post('/v1/favorite', variable)
       .then(res => {
         // console.log(res)
         if (res.data.success) {
@@ -45,7 +45,7 @@ export default function AddToFavorites(props) {
       charId: props.charId,
     }
 
-    axios.delete('http://localhost:8080/v1/favorite', { data: variable })
+    axios.delete('/v1/favorite', { data: variable })
       .then(res => {
         // console.log(res)
         if (res.data.success) {

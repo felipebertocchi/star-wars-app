@@ -72,7 +72,7 @@ export default function SearchBar() {
 
   async function fetchPeople() {
     // setLoading(true)
-    const resp = await axios.get('http://localhost:8080/v1/character')
+    const resp = await axios.get('/v1/character')
     setData(resp.data.results);
     // setLoading(false)
   }

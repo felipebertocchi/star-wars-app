@@ -24,13 +24,13 @@ export default function FilmDetailPage(props) {
   useEffect(() => {
     async function fetchFilm() {
       setLoading(true);
-      axios.get('http://localhost:8080/v1/filmlist/' + filmId)
+      axios.get('/v1/filmlist/' + filmId)
         .then(resp => {
           setFilm(resp.data.result.properties);
         });
     }
     async function fetchFilmCharacters() {
-      axios.get('http://localhost:8080/v1//filmcharacters/' + filmId)
+      axios.get('/v1//filmcharacters/' + filmId)
         .then(resp => {
           console.log(resp.data)
           setFilmCharacters(resp.data);
