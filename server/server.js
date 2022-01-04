@@ -8,8 +8,8 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 // SETTINGS
-app.set('port', process.env.PORT || 8080);
 dotenv.config();
+app.set('port', process.env.PORT || 8080);
 mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB connected successfully"));
 
 // ROUTES
@@ -47,6 +47,14 @@ app.use(apiRoute, favorite);
 
 app.use(apiRoute, login);
 app.use(apiRoute, signup);
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "/client/build")));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    })
+}
 
 // SERVER LISTENING
 app.listen(app.get('port'), () => {
