@@ -118,7 +118,8 @@ Si lo deseas, también puedes ingresar a los endpoints del backend desde:
   ```
   http://localhost:8080
   ```
-> Para esto último recomiendo la aplicación [Postman](https://www.postman.com/) para realizar distintos tipos de request con un body, esto será necesario para acceder a la mayoría ya que requiere un login. Puedes ver los distintos endpoint (aquí)[#backend]
+> Para esto último recomiendo la aplicación [Postman](https://www.postman.com/) para realizar distintos tipos de request con un body, esto será necesario para acceder a la mayoría ya que requiere un login. Puedes ver los distintos endpoint [aquí](#backend)
+
 <p align="right"><a href="#top">Volver arriba</a></p>
 
 ## Uso
