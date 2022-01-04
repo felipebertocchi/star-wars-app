@@ -4,6 +4,9 @@
 
 Una aplicación que muestra los personajes, los planetas y las películas de Star Wars, desarrollada con React, Node, Express y MongoDB.
 
+### [Demo de la app en Heroku](https://peaceful-coast-02373.herokuapp.com/)
+
+---
 
 ## Tabla of Contenidos
 - [Features](#features)
@@ -19,6 +22,8 @@ Una aplicación que muestra los personajes, los planetas y las películas de Sta
 - [Carpetas del proyecto](#carpetas-del-proyecto)
 - [Contribuciones](#contribuciones)
 - [Contacto](#contacto)
+
+---
 
 ## Features:
   - Acceso a información detallada de personajes, planetas y películas pertenecientes a la trilogía original y las precuelas.
