@@ -22,6 +22,7 @@ export default function Login() {
     }
 
     const [formValue, setformValue] = useState({email: '', password: ''});
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -36,7 +37,7 @@ export default function Login() {
             routeChange('/');
         })
         .catch(function (error) {
-            console.log(error);
+            setErrorMessage(error.response.data);
         });
     }
 
@@ -57,6 +58,9 @@ export default function Login() {
                         <TextField data-test-id="login-email" style={formStyle} onChange={handleChange} label="Email" variant="outlined" fullWidth required type='email' name='email' value={formValue.email}/>
                         <TextField data-test-id="login-password" style={formStyle} onChange={handleChange} label="Contraseña" variant="outlined" fullWidth required type='password' name='password' value={formValue.password}/>
                         <Button data-test-id="sign-in" style={formStyle} type='submit' variant='contained' color='primary' fullWidth>Iniciar Sesión</Button>
+                        {errorMessage && (
+                            <p className="error"> {errorMessage} </p>
+                        )}
                     </form>
                 </Grid>
             </Paper>

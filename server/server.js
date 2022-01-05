@@ -10,7 +10,6 @@ const app = express();
 // SETTINGS
 dotenv.config();
 app.set('port', process.env.PORT || 8080);
-mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("MongoDB connected successfully"));
 
 // ROUTES
 const apiRoute = '/v1'
@@ -61,6 +60,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // SERVER LISTENING
-app.listen(app.get('port'), () => {
-    console.log('Server on port', app.get('port'));
+mongoose.connect(process.env.DATABASE_ACCESS, () => {
+    console.log("MongoDB connected successfully");
+    
+    app.listen(app.get('port'), () => {
+        console.log('Server on port', app.get('port'));
+    });
 });
